@@ -333,17 +333,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'DefaultContainer',
+  name: "DefaultContainer",
   components: {
     AsideToggler: _coreui_vue__WEBPACK_IMPORTED_MODULE_1__["AsideToggler"],
     AppHeader: _coreui_vue__WEBPACK_IMPORTED_MODULE_1__["Header"],
@@ -1256,56 +1251,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-navbar-nav",
-            { staticClass: "d-md-down-none" },
-            [
-              _c(
-                "b-nav-item",
-                { staticClass: "px-3", attrs: { to: "/dashboard" } },
-                [_vm._v("Dashboard")]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-nav-item",
-                { staticClass: "px-3", attrs: { to: "/users", exact: "" } },
-                [_vm._v("Users")]
-              ),
-              _vm._v(" "),
-              _c("b-nav-item", { staticClass: "px-3" }, [_vm._v("Settings")])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-navbar-nav",
             { staticClass: "ml-auto" },
-            [
-              _c(
-                "b-nav-item",
-                { staticClass: "d-md-down-none" },
-                [
-                  _c("i", { staticClass: "icon-bell" }),
-                  _vm._v(" "),
-                  _c("b-badge", { attrs: { pill: "", variant: "danger" } }, [
-                    _vm._v("5")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("b-nav-item", { staticClass: "d-md-down-none" }, [
-                _c("i", { staticClass: "icon-list" })
-              ]),
-              _vm._v(" "),
-              _c("b-nav-item", { staticClass: "d-md-down-none" }, [
-                _c("i", { staticClass: "icon-location-pin" })
-              ]),
-              _vm._v(" "),
-              _c("DefaultHeaderDropdownAccnt")
-            ],
+            [_c("DefaultHeaderDropdownAccnt")],
             1
-          ),
-          _vm._v(" "),
-          _c("AsideToggler", { staticClass: "d-none d-lg-block" })
+          )
         ],
         1
       ),
@@ -1356,15 +1305,13 @@ var render = function() {
         _c("div", [
           _c("a", { attrs: { href: "https://coreui.io" } }, [_vm._v("CoreUI")]),
           _vm._v(" "),
-          _c("span", { staticClass: "ml-1" }, [_vm._v("© 2018 creativeLabs.")])
+          _c("span", { staticClass: "ml-1" }, [_vm._v("© 2019.")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "ml-auto" }, [
           _c("span", { staticClass: "mr-1" }, [_vm._v("Powered by")]),
           _vm._v(" "),
-          _c("a", { attrs: { href: "https://coreui.io" } }, [
-            _vm._v("CoreUI for Vue")
-          ])
+          _c("a", { attrs: { href: "/" } }, [_vm._v("CoreUI for Vue")])
         ])
       ])
     ],
@@ -1538,132 +1485,148 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   items: [{
-    name: 'Dashboard',
-    url: '/dashboard',
-    icon: 'icon-speedometer',
-    badge: {
-      variant: 'primary',
-      text: 'NEW'
-    }
+    name: "Dashboard",
+    url: "/dashboard",
+    icon: "icon-speedometer"
   }, {
     title: true,
-    name: 'Theme',
-    "class": '',
+    name: "Manager",
+    "class": "",
     wrapper: {
-      element: '',
+      element: "",
       attributes: {}
     }
   }, {
-    name: 'Colors',
-    url: '/theme/colors',
-    icon: 'icon-drop'
+    name: "User",
+    url: "/users",
+    icon: "icon-user"
   }, {
-    name: 'Typography',
-    url: '/theme/typography',
-    icon: 'icon-pencil'
-  }, {
+    name: "Product",
+    url: "/products",
+    icon: "icon-present"
+  }, // {
+  //     title: true,
+  //     name: "Theme",
+  //     class: "",
+  //     wrapper: {
+  //         element: "",
+  //         attributes: {}
+  //     }
+  // },
+  // {
+  //     name: "Colors",
+  //     url: "/theme/colors",
+  //     icon: "icon-drop"
+  // },
+  // {
+  //     name: "Typography",
+  //     url: "/theme/typography",
+  //     icon: "icon-pencil"
+  // },
+  {
     title: true,
-    name: 'Components',
-    "class": '',
+    name: "Components",
+    "class": "",
     wrapper: {
-      element: '',
+      element: "",
       attributes: {}
     }
   }, {
-    name: 'Base',
-    url: '/base',
-    icon: 'icon-puzzle',
+    name: "Base",
+    url: "/base",
+    icon: "icon-puzzle",
     children: [{
-      name: 'Breadcrumbs',
-      url: '/base/breadcrumbs',
-      icon: 'icon-puzzle'
+      name: "Breadcrumbs",
+      url: "/base/breadcrumbs",
+      icon: "icon-puzzle"
     }, {
-      name: 'Cards',
-      url: '/base/cards',
-      icon: 'icon-puzzle'
+      name: "Cards",
+      url: "/base/cards",
+      icon: "icon-puzzle"
     }, {
-      name: 'Carousels',
-      url: '/base/carousels',
-      icon: 'icon-puzzle'
+      name: "Carousels",
+      url: "/base/carousels",
+      icon: "icon-puzzle"
     }, {
-      name: 'Collapses',
-      url: '/base/collapses',
-      icon: 'icon-puzzle'
+      name: "Collapses",
+      url: "/base/collapses",
+      icon: "icon-puzzle"
     }, {
-      name: 'Forms',
-      url: '/base/forms',
-      icon: 'icon-puzzle'
+      name: "Forms",
+      url: "/base/forms",
+      icon: "icon-puzzle"
     }, {
-      name: 'Jumbotrons',
-      url: '/base/jumbotrons',
-      icon: 'icon-puzzle'
+      name: "Jumbotrons",
+      url: "/base/jumbotrons",
+      icon: "icon-puzzle"
     }, {
-      name: 'List Groups',
-      url: '/base/list-groups',
-      icon: 'icon-puzzle'
+      name: "List Groups",
+      url: "/base/list-groups",
+      icon: "icon-puzzle"
     }, {
-      name: 'Navs',
-      url: '/base/navs',
-      icon: 'icon-puzzle'
+      name: "Navs",
+      url: "/base/navs",
+      icon: "icon-puzzle"
     }, {
-      name: 'Navbars',
-      url: '/base/navbars',
-      icon: 'icon-puzzle'
+      name: "Navbars",
+      url: "/base/navbars",
+      icon: "icon-puzzle"
     }, {
-      name: 'Paginations',
-      url: '/base/paginations',
-      icon: 'icon-puzzle'
+      name: "Paginations",
+      url: "/base/paginations",
+      icon: "icon-puzzle"
     }, {
-      name: 'Popovers',
-      url: '/base/popovers',
-      icon: 'icon-puzzle'
+      name: "Popovers",
+      url: "/base/popovers",
+      icon: "icon-puzzle"
     }, {
-      name: 'Progress Bars',
-      url: '/base/progress-bars',
-      icon: 'icon-puzzle'
+      name: "Progress Bars",
+      url: "/base/progress-bars",
+      icon: "icon-puzzle"
     }, {
-      name: 'Switches',
-      url: '/base/switches',
-      icon: 'icon-puzzle'
+      name: "Switches",
+      url: "/base/switches",
+      icon: "icon-puzzle"
     }, {
-      name: 'Tables',
-      url: '/base/tables',
-      icon: 'icon-puzzle'
+      name: "Tables",
+      url: "/base/tables",
+      icon: "icon-puzzle"
     }, {
-      name: 'Tabs',
-      url: '/base/tabs',
-      icon: 'icon-puzzle'
+      name: "Tabs",
+      url: "/base/tabs",
+      icon: "icon-puzzle"
     }, {
-      name: 'Tooltips',
-      url: '/base/tooltips',
-      icon: 'icon-puzzle'
+      name: "Tooltips",
+      url: "/base/tooltips",
+      icon: "icon-puzzle"
     }]
   }, {
-    name: 'Buttons',
-    url: '/buttons',
-    icon: 'icon-cursor',
+    name: "Buttons",
+    url: "/buttons",
+    icon: "icon-cursor",
     children: [{
-      name: 'Buttons',
-      url: '/buttons/standard-buttons',
-      icon: 'icon-cursor'
+      name: "Buttons",
+      url: "/buttons/standard-buttons",
+      icon: "icon-cursor"
     }, {
-      name: 'Button Dropdowns',
-      url: '/buttons/dropdowns',
-      icon: 'icon-cursor'
+      name: "Button Dropdowns",
+      url: "/buttons/dropdowns",
+      icon: "icon-cursor"
     }, {
-      name: 'Button Groups',
-      url: '/buttons/button-groups',
-      icon: 'icon-cursor'
+      name: "Button Groups",
+      url: "/buttons/button-groups",
+      icon: "icon-cursor"
     }, {
-      name: 'Brand Buttons',
-      url: '/buttons/brand-buttons',
-      icon: 'icon-cursor'
+      name: "Brand Buttons",
+      url: "/buttons/brand-buttons",
+      icon: "icon-cursor"
     }]
-  }, {
-    name: 'Charts',
-    url: '/charts',
-    icon: 'icon-pie-chart'
-  }, {
+  }, // {
+  //   name: 'Charts',
+  //   url: '/charts',
+  //   icon: 'icon-pie-chart'
+  // },
+  {
     name: 'Icons',
     url: '/icons',
     icon: 'icon-star',
@@ -1692,87 +1655,88 @@ __webpack_require__.r(__webpack_exports__);
       url: '/icons/simple-line-icons',
       icon: 'icon-star'
     }]
-  }, {
-    name: 'Notifications',
-    url: '/notifications',
-    icon: 'icon-bell',
-    children: [{
-      name: 'Alerts',
-      url: '/notifications/alerts',
-      icon: 'icon-bell'
-    }, {
-      name: 'Badges',
-      url: '/notifications/badges',
-      icon: 'icon-bell'
-    }, {
-      name: 'Modals',
-      url: '/notifications/modals',
-      icon: 'icon-bell'
-    }]
-  }, {
-    name: 'Widgets',
-    url: '/widgets',
-    icon: 'icon-calculator',
-    badge: {
-      variant: 'primary',
-      text: 'NEW'
-    }
-  }, {
+  }, // {
+  //   name: 'Notifications',
+  //   url: '/notifications',
+  //   icon: 'icon-bell',
+  //   children: [
+  //     {
+  //       name: 'Alerts',
+  //       url: '/notifications/alerts',
+  //       icon: 'icon-bell'
+  //     },
+  //     {
+  //       name: 'Badges',
+  //       url: '/notifications/badges',
+  //       icon: 'icon-bell'
+  //     },
+  //     {
+  //       name: 'Modals',
+  //       url: '/notifications/modals',
+  //       icon: 'icon-bell'
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Widgets',
+  //   url: '/widgets',
+  //   icon: 'icon-calculator',
+  //   badge: {
+  //     variant: 'primary',
+  //     text: 'NEW'
+  //   }
+  // },
+  {
     divider: true
   }, {
     title: true,
-    name: 'Extras'
+    name: "Extras"
   }, {
-    name: 'Pages',
-    url: '/pages',
-    icon: 'icon-star',
+    name: "Pages",
+    url: "/pages",
+    icon: "icon-star",
     children: [{
-      name: 'Login',
-      url: '/pages/login',
-      icon: 'icon-star'
+      name: "Login",
+      url: "/pages/login",
+      icon: "icon-star"
     }, {
-      name: 'Register',
-      url: '/pages/register',
-      icon: 'icon-star'
+      name: "Register",
+      url: "/pages/register",
+      icon: "icon-star"
     }, {
-      name: 'Error 404',
-      url: '/pages/404',
-      icon: 'icon-star'
+      name: "Error 404",
+      url: "/pages/404",
+      icon: "icon-star"
     }, {
-      name: 'Error 500',
-      url: '/pages/500',
-      icon: 'icon-star'
-    }]
-  }, {
-    name: 'Disabled',
-    url: '/dashboard',
-    icon: 'icon-ban',
-    badge: {
-      variant: 'secondary',
-      text: 'NEW'
-    },
-    attributes: {
-      disabled: true
-    }
-  }, {
-    name: 'Download CoreUI',
-    url: 'http://coreui.io/vue/',
-    icon: 'icon-cloud-download',
-    "class": 'mt-auto',
-    variant: 'success',
-    attributes: {
-      target: '_blank',
-      rel: 'noopener'
-    }
-  }, {
-    name: 'Try CoreUI PRO',
-    url: 'http://coreui.io/pro/vue/',
-    icon: 'icon-layers',
-    variant: 'danger',
-    attributes: {
-      target: '_blank',
-      rel: 'noopener'
-    }
+      name: "Error 500",
+      url: "/pages/500",
+      icon: "icon-star"
+    }] // {
+    //   name: 'Disabled',
+    //   url: '/dashboard',
+    //   icon: 'icon-ban',
+    //   badge: {
+    //     variant: 'secondary',
+    //     text: 'NEW'
+    //   },
+    //   attributes: { disabled: true },
+    // },
+    // {
+    //   name: 'Download CoreUI',
+    //   url: 'http://coreui.io/vue/',
+    //   icon: 'icon-cloud-download',
+    //   class: 'mt-auto',
+    //   variant: 'success',
+    //   attributes: { target: '_blank', rel: 'noopener' }
+    // },
+    // {
+    //   name: 'Try CoreUI PRO',
+    //   url: 'http://coreui.io/pro/vue/',
+    //   icon: 'icon-layers',
+    //   variant: 'danger',
+    //   attributes: { target: '_blank', rel: 'noopener' }
+    // },
+
   }]
 });
 

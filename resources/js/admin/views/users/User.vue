@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col cols="12" lg="6">
+    <b-col cols="12">
       <b-card no-header>
         <template slot="header">
           User id:  {{ $route.params.id }}
