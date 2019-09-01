@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[42],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/views/Dashboard.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
@@ -9,6 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _coreui_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @coreui/vue */ "./node_modules/@coreui/vue/dist/coreui-vue.esm.js");
 //
 //
 //
@@ -50,8 +51,199 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "dashboard"
+  name: "dashboard",
+  components: {
+    Callout: _coreui_vue__WEBPACK_IMPORTED_MODULE_0__["Callout"]
+  },
+  data: function data() {
+    return {
+      selected: "Month",
+      tableItems: [{
+        avatar: {
+          url: "img/avatars/1.jpg",
+          status: "success"
+        },
+        user: {
+          name: "Yiorgos Avraamu",
+          "new": true,
+          registered: "Jan 1, 2015"
+        },
+        country: {
+          name: "USA",
+          flag: "us"
+        },
+        usage: {
+          value: 50,
+          period: "Jun 11, 2015 - Jul 10, 2015"
+        },
+        payment: {
+          name: "Mastercard",
+          icon: "fa fa-cc-mastercard"
+        },
+        activity: "10 sec ago"
+      }, {
+        avatar: {
+          url: "img/avatars/2.jpg",
+          status: "danger"
+        },
+        user: {
+          name: "Avram Tarasios",
+          "new": false,
+          registered: "Jan 1, 2015"
+        },
+        country: {
+          name: "Brazil",
+          flag: "br"
+        },
+        usage: {
+          value: 22,
+          period: "Jun 11, 2015 - Jul 10, 2015"
+        },
+        payment: {
+          name: "Visa",
+          icon: "fa fa-cc-visa"
+        },
+        activity: "5 minutes ago"
+      }, {
+        avatar: {
+          url: "img/avatars/3.jpg",
+          status: "warning"
+        },
+        user: {
+          name: "Quintin Ed",
+          "new": true,
+          registered: "Jan 1, 2015"
+        },
+        country: {
+          name: "India",
+          flag: "in"
+        },
+        usage: {
+          value: 74,
+          period: "Jun 11, 2015 - Jul 10, 2015"
+        },
+        payment: {
+          name: "Stripe",
+          icon: "fa fa-cc-stripe"
+        },
+        activity: "1 hour ago"
+      }, {
+        avatar: {
+          url: "img/avatars/4.jpg",
+          status: ""
+        },
+        user: {
+          name: "Enéas Kwadwo",
+          "new": true,
+          registered: "Jan 1, 2015"
+        },
+        country: {
+          name: "France",
+          flag: "fr"
+        },
+        usage: {
+          value: 98,
+          period: "Jun 11, 2015 - Jul 10, 2015"
+        },
+        payment: {
+          name: "PayPal",
+          icon: "fa fa-paypal"
+        },
+        activity: "Last month"
+      }, {
+        avatar: {
+          url: "img/avatars/5.jpg",
+          status: "success"
+        },
+        user: {
+          name: "Agapetus Tadeáš",
+          "new": true,
+          registered: "Jan 1, 2015"
+        },
+        country: {
+          name: "Spain",
+          flag: "es"
+        },
+        usage: {
+          value: 22,
+          period: "Jun 11, 2015 - Jul 10, 2015"
+        },
+        payment: {
+          name: "Google Wallet",
+          icon: "fa fa-google-wallet"
+        },
+        activity: "Last week"
+      }, {
+        avatar: {
+          url: "img/avatars/6.jpg",
+          status: "danger"
+        },
+        user: {
+          name: "Friderik Dávid",
+          "new": true,
+          registered: "Jan 1, 2015"
+        },
+        country: {
+          name: "Poland",
+          flag: "pl"
+        },
+        usage: {
+          value: 43,
+          period: "Jun 11, 2015 - Jul 10, 2015"
+        },
+        payment: {
+          name: "Amex",
+          icon: "fa fa-cc-amex"
+        },
+        activity: "Last week"
+      }],
+      tableFields: {
+        avatar: {
+          label: '<i class="icon-people"></i>',
+          "class": "text-center"
+        },
+        user: {
+          label: "User"
+        },
+        country: {
+          label: "Country",
+          "class": "text-center"
+        },
+        usage: {
+          label: "Usage"
+        },
+        payment: {
+          label: "Payment method",
+          "class": "text-center"
+        },
+        activity: {
+          label: "Activity"
+        }
+      }
+    };
+  },
+  methods: {
+    variant: function variant(value) {
+      var $variant;
+
+      if (value <= 25) {
+        $variant = "info";
+      } else if (value > 25 && value <= 50) {
+        $variant = "success";
+      } else if (value > 50 && value <= 75) {
+        $variant = "warning";
+      } else if (value > 75 && value <= 100) {
+        $variant = "danger";
+      }
+
+      return $variant;
+    },
+    flag: function flag(value) {
+      return "flag-icon flag-icon-" + value;
+    }
+  }
 });
 
 /***/ }),
@@ -68,7 +260,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.icon-custom[data-v-2991c845] {\n  font-size: 50px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* IE fix */\n.icon-custom[data-v-2991c845] {\n  font-size: 50px;\n}\n#card-chart-01[data-v-2991c845],\n#card-chart-02[data-v-2991c845] {\n  width: 100% !important;\n}\n", ""]);
 
 // exports
 
@@ -184,7 +376,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { attrs: { to: "/products", tag: "p" } },
+                    { attrs: { to: "/users", tag: "p" } },
                     [
                       _c(
                         "b-card-body",

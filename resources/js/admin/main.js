@@ -10,8 +10,7 @@ import BootstrapVue from "bootstrap-vue";
 import App from "./App";
 import router from "./router";
 
-// todo
-// cssVars()
+import store from "./state";
 
 Vue.use(BootstrapVue);
 
@@ -19,6 +18,7 @@ Vue.use(BootstrapVue);
 new Vue({
     el: "#app",
     router,
+    store,
     template: "<App/>",
     components: {
         App

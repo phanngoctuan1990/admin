@@ -1,37 +1,74 @@
 <template>
   <b-row>
-    <b-col cols="12" xl="6">
+    <b-col cols="12">
       <transition name="slide">
-      <b-card>
-        <div slot="header" v-html="caption"></div>
-        <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="rowClicked">
-          <template slot="id" slot-scope="data">
-            <strong>{{data.item.id}}</strong>
-          </template>
-          <template slot="name" slot-scope="data">
-            <strong>{{data.item.name}}</strong>
-          </template>
-          <template slot="status" slot-scope="data">
-            <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
-          </template>
-        </b-table>
-        <nav>
-          <b-pagination size="sm" :total-rows="getRowCount(items)" :per-page="perPage" v-model="currentPage" prev-text="Prev" next-text="Next" hide-goto-end-buttons/>
-        </nav>
-      </b-card>
+        <b-card>
+          <div slot="header">
+            <div class="float-left">{{ caption }}</div>
+            <div class="button-action float-right">
+              <b-button to="/" variant="primary" size="sm" class="mr-1">
+                <i class="fa fa-plus"></i> Create
+              </b-button>
+            </div>
+          </div>
+
+          <b-row>
+            <b-col align-self="end">
+              <b-form-group class="float-right">
+                <b-input-group>
+                  <b-form-input type="text" v-model="keyword" @change="fetchUsers(1)"></b-form-input>
+                  <b-input-group-prepend>
+                    <b-button variant="primary">
+                      <i class="fa fa-search"></i>
+                    </b-button>
+                  </b-input-group-prepend>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+          </b-row>
+
+          <b-table
+            :hover="hover"
+            :striped="striped"
+            :bordered="bordered"
+            :small="small"
+            :fixed="fixed"
+            responsive="sm"
+            :items="items"
+            :fields="fields"
+            @row-clicked="rowClicked"
+          >
+            <template slot="id" slot-scope="data">
+              <strong>{{data.item.id}}</strong>
+            </template>
+            <template slot="name" slot-scope="data">
+              <strong>{{data.item.name}}</strong>
+            </template>
+          </b-table>
+          <nav>
+            <Pagination
+              :perPage="perPage"
+              :totalRows="totalRows"
+              :currentPage="currentPage"
+              @changePage="fetchUsers($event)"
+            />
+          </nav>
+        </b-card>
       </transition>
     </b-col>
   </b-row>
 </template>
 
 <script>
-import usersData from './UsersData'
+import Pagination from "../commons/pagination";
+
 export default {
-  name: 'Users',
+  name: "Users",
+  components: { Pagination },
   props: {
     caption: {
       type: String,
-      default: 'Users'
+      default: "Users"
     },
     hover: {
       type: Boolean,
@@ -56,41 +93,46 @@ export default {
   },
   data: () => {
     return {
-      items: usersData.filter((user) => user.id < 42),
+      items: [],
       fields: [
-        {key: 'id'},
-        {key: 'name'},
-        {key: 'registered'},
-        {key: 'role'},
-        {key: 'status'}
+        { key: "id", label: "ID" },
+        { key: "name", label: "Name" },
+        { key: "email", label: "Email" },
+        { key: "created_at", label: "Created at" },
+        { key: "action", label: "Action" }
       ],
-      currentPage: 1,
       perPage: 5,
-      totalRows: 0
-    }
+      totalRows: 0,
+      currentPage: 1,
+      keyword: ""
+    };
   },
-  computed: {
+  mounted() {
+    this.fetchUsers(this.currentPage);
   },
   methods: {
-    getBadge (status) {
-      return status === 'Active' ? 'success'
-        : status === 'Inactive' ? 'secondary'
-          : status === 'Pending' ? 'warning'
-            : status === 'Banned' ? 'danger' : 'primary'
+    fetchUsers(page) {
+      const payload = { page: page };
+      this.keyword = _.trim(this.keyword);
+      if (this.keyword) {
+        payload.keyword = this.keyword;
+      }
+      this.$store.dispatch("user/fetch", payload).then(res => {
+        this.items = res.data;
+        this.totalRows = res.total;
+        this.perPage = res.per_page;
+        this.currentPage = res.current_page;
+      });
     },
-    getRowCount (items) {
-      return items.length
+    userLink(id) {
+      return `users/${id.toString()}`;
     },
-    userLink (id) {
-      return `users/${id.toString()}`
-    },
-    rowClicked (item) {
-      const userLink = this.userLink(item.id)
-      this.$router.push({path: userLink})
+    rowClicked(item) {
+      const userLink = this.userLink(item.id);
+      this.$router.push({ path: userLink });
     }
-
   }
-}
+};
 </script>
 
 <style scoped>

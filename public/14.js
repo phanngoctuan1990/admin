@@ -101,7 +101,7 @@ var render = function() {
     [
       _c(
         "b-col",
-        { attrs: { cols: "12", lg: "6" } },
+        { attrs: { cols: "12" } },
         [
           _c(
             "b-card",

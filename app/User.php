@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const PerPage = 15;
+
     /**
      * The attributes that are mass assignable.
      *
