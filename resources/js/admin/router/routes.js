@@ -20,7 +20,7 @@ export default [
         name: "Home",
         component: DefaultContainer,
         meta: {
-            auth: false
+            auth: true
         },
         children: [
             {

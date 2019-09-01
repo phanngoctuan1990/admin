@@ -22,7 +22,6 @@ router.beforeEach((routeTo, routeFrom, next) => {
     // Check if auth is required on this route
     // (including nested routes).
     const authRequired = routeTo.matched.some(route => route.meta.auth);
-    console.log(authRequired);
 
     // If auth isn't required for the route, just continue.
     if (!authRequired) return next();
