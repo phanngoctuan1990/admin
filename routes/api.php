@@ -11,9 +11,12 @@
 |
 */
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+Route::group(['middleware' => 'api', 'prefix' => 'v1', 'namespace' => 'Admin'], function () {
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('login', 'AuthController@login');
+        Route::post('logout', 'AuthController@logout');
+        Route::get('refresh', 'AuthController@refresh');
+        Route::get('me', 'AuthController@me');
+    });
+    Route::resource('users', 'UserController');
 });

@@ -1,3 +1,5 @@
+import http from "../../../services/http";
+
 const actions = {
     async fetch({ commit }, payload) {
         try {
@@ -5,7 +7,7 @@ const actions = {
             if (payload.hasOwnProperty("keyword")) {
                 queryString += `&search=${payload.keyword}`;
             }
-            const { data } = await axios.get("/users" + queryString);
+            const { data } = await http.get("/users" + queryString);
             return data;
         } catch (error) {
             console.error(error);

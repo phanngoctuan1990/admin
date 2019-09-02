@@ -1,5 +1,7 @@
+import storage from "../../../services/localstorage";
+
 const states = {
-    currentUser: null
+    currentUser: storage.getState("auth.currentUser")
 };
 
 export default states;
