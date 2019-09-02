@@ -85,11 +85,9 @@ export default {
   },
   methods: {
     onSlideStart (slide) {
-      console.log('onSlideStart', slide)
       this.sliding = true
     },
     onSlideEnd (slide) {
-      console.log('onSlideEnd', slide)
       this.sliding = false
     }
   }

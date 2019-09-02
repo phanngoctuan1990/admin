@@ -54515,6 +54515,1081 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_Symbol.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayMap.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_arrayMap.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+module.exports = arrayMap;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayReduce.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_arrayReduce.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.reduce` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @param {*} [accumulator] The initial value.
+ * @param {boolean} [initAccum] Specify using the first element of `array` as
+ *  the initial value.
+ * @returns {*} Returns the accumulated value.
+ */
+function arrayReduce(array, iteratee, accumulator, initAccum) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  if (initAccum && length) {
+    accumulator = array[++index];
+  }
+  while (++index < length) {
+    accumulator = iteratee(accumulator, array[index], index, array);
+  }
+  return accumulator;
+}
+
+module.exports = arrayReduce;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_asciiToArray.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_asciiToArray.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Converts an ASCII `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function asciiToArray(string) {
+  return string.split('');
+}
+
+module.exports = asciiToArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_asciiWords.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_asciiWords.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to match words composed of alphanumeric characters. */
+var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+
+/**
+ * Splits an ASCII `string` into an array of its words.
+ *
+ * @private
+ * @param {string} The string to inspect.
+ * @returns {Array} Returns the words of `string`.
+ */
+function asciiWords(string) {
+  return string.match(reAsciiWord) || [];
+}
+
+module.exports = asciiWords;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_basePropertyOf.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_basePropertyOf.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.propertyOf` without support for deep paths.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Function} Returns the new accessor function.
+ */
+function basePropertyOf(object) {
+  return function(key) {
+    return object == null ? undefined : object[key];
+  };
+}
+
+module.exports = basePropertyOf;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSlice.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseSlice.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.slice` without an iteratee call guard.
+ *
+ * @private
+ * @param {Array} array The array to slice.
+ * @param {number} [start=0] The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the slice of `array`.
+ */
+function baseSlice(array, start, end) {
+  var index = -1,
+      length = array.length;
+
+  if (start < 0) {
+    start = -start > length ? 0 : (length + start);
+  }
+  end = end > length ? length : end;
+  if (end < 0) {
+    end += length;
+  }
+  length = start > end ? 0 : ((end - start) >>> 0);
+  start >>>= 0;
+
+  var result = Array(length);
+  while (++index < length) {
+    result[index] = array[index + start];
+  }
+  return result;
+}
+
+module.exports = baseSlice;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseToString.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseToString.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    arrayMap = __webpack_require__(/*! ./_arrayMap */ "./node_modules/lodash/_arrayMap.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolToString = symbolProto ? symbolProto.toString : undefined;
+
+/**
+ * The base implementation of `_.toString` which doesn't convert nullish
+ * values to empty strings.
+ *
+ * @private
+ * @param {*} value The value to process.
+ * @returns {string} Returns the string.
+ */
+function baseToString(value) {
+  // Exit early for strings to avoid a performance hit in some environments.
+  if (typeof value == 'string') {
+    return value;
+  }
+  if (isArray(value)) {
+    // Recursively convert values (susceptible to call stack limits).
+    return arrayMap(value, baseToString) + '';
+  }
+  if (isSymbol(value)) {
+    return symbolToString ? symbolToString.call(value) : '';
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+module.exports = baseToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castSlice.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_castSlice.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseSlice = __webpack_require__(/*! ./_baseSlice */ "./node_modules/lodash/_baseSlice.js");
+
+/**
+ * Casts `array` to a slice if it's needed.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {number} start The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the cast slice.
+ */
+function castSlice(array, start, end) {
+  var length = array.length;
+  end = end === undefined ? length : end;
+  return (!start && end >= length) ? array : baseSlice(array, start, end);
+}
+
+module.exports = castSlice;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createCaseFirst.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_createCaseFirst.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var castSlice = __webpack_require__(/*! ./_castSlice */ "./node_modules/lodash/_castSlice.js"),
+    hasUnicode = __webpack_require__(/*! ./_hasUnicode */ "./node_modules/lodash/_hasUnicode.js"),
+    stringToArray = __webpack_require__(/*! ./_stringToArray */ "./node_modules/lodash/_stringToArray.js"),
+    toString = __webpack_require__(/*! ./toString */ "./node_modules/lodash/toString.js");
+
+/**
+ * Creates a function like `_.lowerFirst`.
+ *
+ * @private
+ * @param {string} methodName The name of the `String` case method to use.
+ * @returns {Function} Returns the new case function.
+ */
+function createCaseFirst(methodName) {
+  return function(string) {
+    string = toString(string);
+
+    var strSymbols = hasUnicode(string)
+      ? stringToArray(string)
+      : undefined;
+
+    var chr = strSymbols
+      ? strSymbols[0]
+      : string.charAt(0);
+
+    var trailing = strSymbols
+      ? castSlice(strSymbols, 1).join('')
+      : string.slice(1);
+
+    return chr[methodName]() + trailing;
+  };
+}
+
+module.exports = createCaseFirst;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createCompounder.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_createCompounder.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayReduce = __webpack_require__(/*! ./_arrayReduce */ "./node_modules/lodash/_arrayReduce.js"),
+    deburr = __webpack_require__(/*! ./deburr */ "./node_modules/lodash/deburr.js"),
+    words = __webpack_require__(/*! ./words */ "./node_modules/lodash/words.js");
+
+/** Used to compose unicode capture groups. */
+var rsApos = "['\u2019]";
+
+/** Used to match apostrophes. */
+var reApos = RegExp(rsApos, 'g');
+
+/**
+ * Creates a function like `_.camelCase`.
+ *
+ * @private
+ * @param {Function} callback The function to combine each word.
+ * @returns {Function} Returns the new compounder function.
+ */
+function createCompounder(callback) {
+  return function(string) {
+    return arrayReduce(words(deburr(string).replace(reApos, '')), callback, '');
+  };
+}
+
+module.exports = createCompounder;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_deburrLetter.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_deburrLetter.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var basePropertyOf = __webpack_require__(/*! ./_basePropertyOf */ "./node_modules/lodash/_basePropertyOf.js");
+
+/** Used to map Latin Unicode letters to basic Latin letters. */
+var deburredLetters = {
+  // Latin-1 Supplement block.
+  '\xc0': 'A',  '\xc1': 'A', '\xc2': 'A', '\xc3': 'A', '\xc4': 'A', '\xc5': 'A',
+  '\xe0': 'a',  '\xe1': 'a', '\xe2': 'a', '\xe3': 'a', '\xe4': 'a', '\xe5': 'a',
+  '\xc7': 'C',  '\xe7': 'c',
+  '\xd0': 'D',  '\xf0': 'd',
+  '\xc8': 'E',  '\xc9': 'E', '\xca': 'E', '\xcb': 'E',
+  '\xe8': 'e',  '\xe9': 'e', '\xea': 'e', '\xeb': 'e',
+  '\xcc': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
+  '\xec': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
+  '\xd1': 'N',  '\xf1': 'n',
+  '\xd2': 'O',  '\xd3': 'O', '\xd4': 'O', '\xd5': 'O', '\xd6': 'O', '\xd8': 'O',
+  '\xf2': 'o',  '\xf3': 'o', '\xf4': 'o', '\xf5': 'o', '\xf6': 'o', '\xf8': 'o',
+  '\xd9': 'U',  '\xda': 'U', '\xdb': 'U', '\xdc': 'U',
+  '\xf9': 'u',  '\xfa': 'u', '\xfb': 'u', '\xfc': 'u',
+  '\xdd': 'Y',  '\xfd': 'y', '\xff': 'y',
+  '\xc6': 'Ae', '\xe6': 'ae',
+  '\xde': 'Th', '\xfe': 'th',
+  '\xdf': 'ss',
+  // Latin Extended-A block.
+  '\u0100': 'A',  '\u0102': 'A', '\u0104': 'A',
+  '\u0101': 'a',  '\u0103': 'a', '\u0105': 'a',
+  '\u0106': 'C',  '\u0108': 'C', '\u010a': 'C', '\u010c': 'C',
+  '\u0107': 'c',  '\u0109': 'c', '\u010b': 'c', '\u010d': 'c',
+  '\u010e': 'D',  '\u0110': 'D', '\u010f': 'd', '\u0111': 'd',
+  '\u0112': 'E',  '\u0114': 'E', '\u0116': 'E', '\u0118': 'E', '\u011a': 'E',
+  '\u0113': 'e',  '\u0115': 'e', '\u0117': 'e', '\u0119': 'e', '\u011b': 'e',
+  '\u011c': 'G',  '\u011e': 'G', '\u0120': 'G', '\u0122': 'G',
+  '\u011d': 'g',  '\u011f': 'g', '\u0121': 'g', '\u0123': 'g',
+  '\u0124': 'H',  '\u0126': 'H', '\u0125': 'h', '\u0127': 'h',
+  '\u0128': 'I',  '\u012a': 'I', '\u012c': 'I', '\u012e': 'I', '\u0130': 'I',
+  '\u0129': 'i',  '\u012b': 'i', '\u012d': 'i', '\u012f': 'i', '\u0131': 'i',
+  '\u0134': 'J',  '\u0135': 'j',
+  '\u0136': 'K',  '\u0137': 'k', '\u0138': 'k',
+  '\u0139': 'L',  '\u013b': 'L', '\u013d': 'L', '\u013f': 'L', '\u0141': 'L',
+  '\u013a': 'l',  '\u013c': 'l', '\u013e': 'l', '\u0140': 'l', '\u0142': 'l',
+  '\u0143': 'N',  '\u0145': 'N', '\u0147': 'N', '\u014a': 'N',
+  '\u0144': 'n',  '\u0146': 'n', '\u0148': 'n', '\u014b': 'n',
+  '\u014c': 'O',  '\u014e': 'O', '\u0150': 'O',
+  '\u014d': 'o',  '\u014f': 'o', '\u0151': 'o',
+  '\u0154': 'R',  '\u0156': 'R', '\u0158': 'R',
+  '\u0155': 'r',  '\u0157': 'r', '\u0159': 'r',
+  '\u015a': 'S',  '\u015c': 'S', '\u015e': 'S', '\u0160': 'S',
+  '\u015b': 's',  '\u015d': 's', '\u015f': 's', '\u0161': 's',
+  '\u0162': 'T',  '\u0164': 'T', '\u0166': 'T',
+  '\u0163': 't',  '\u0165': 't', '\u0167': 't',
+  '\u0168': 'U',  '\u016a': 'U', '\u016c': 'U', '\u016e': 'U', '\u0170': 'U', '\u0172': 'U',
+  '\u0169': 'u',  '\u016b': 'u', '\u016d': 'u', '\u016f': 'u', '\u0171': 'u', '\u0173': 'u',
+  '\u0174': 'W',  '\u0175': 'w',
+  '\u0176': 'Y',  '\u0177': 'y', '\u0178': 'Y',
+  '\u0179': 'Z',  '\u017b': 'Z', '\u017d': 'Z',
+  '\u017a': 'z',  '\u017c': 'z', '\u017e': 'z',
+  '\u0132': 'IJ', '\u0133': 'ij',
+  '\u0152': 'Oe', '\u0153': 'oe',
+  '\u0149': "'n", '\u017f': 's'
+};
+
+/**
+ * Used by `_.deburr` to convert Latin-1 Supplement and Latin Extended-A
+ * letters to basic Latin letters.
+ *
+ * @private
+ * @param {string} letter The matched letter to deburr.
+ * @returns {string} Returns the deburred letter.
+ */
+var deburrLetter = basePropertyOf(deburredLetters);
+
+module.exports = deburrLetter;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_freeGlobal.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_freeGlobal.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getRawTag.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getRawTag.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hasUnicode.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_hasUnicode.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to compose unicode character classes. */
+var rsAstralRange = '\\ud800-\\udfff',
+    rsComboMarksRange = '\\u0300-\\u036f',
+    reComboHalfMarksRange = '\\ufe20-\\ufe2f',
+    rsComboSymbolsRange = '\\u20d0-\\u20ff',
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange,
+    rsVarRange = '\\ufe0e\\ufe0f';
+
+/** Used to compose unicode capture groups. */
+var rsZWJ = '\\u200d';
+
+/** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
+var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboRange + rsVarRange + ']');
+
+/**
+ * Checks if `string` contains Unicode symbols.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {boolean} Returns `true` if a symbol is found, else `false`.
+ */
+function hasUnicode(string) {
+  return reHasUnicode.test(string);
+}
+
+module.exports = hasUnicode;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hasUnicodeWord.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_hasUnicodeWord.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to detect strings that need a more robust regexp to match words. */
+var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+
+/**
+ * Checks if `string` contains a word composed of Unicode symbols.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {boolean} Returns `true` if a word is found, else `false`.
+ */
+function hasUnicodeWord(string) {
+  return reHasUnicodeWord.test(string);
+}
+
+module.exports = hasUnicodeWord;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_objectToString.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_objectToString.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_root.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stringToArray.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_stringToArray.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var asciiToArray = __webpack_require__(/*! ./_asciiToArray */ "./node_modules/lodash/_asciiToArray.js"),
+    hasUnicode = __webpack_require__(/*! ./_hasUnicode */ "./node_modules/lodash/_hasUnicode.js"),
+    unicodeToArray = __webpack_require__(/*! ./_unicodeToArray */ "./node_modules/lodash/_unicodeToArray.js");
+
+/**
+ * Converts `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function stringToArray(string) {
+  return hasUnicode(string)
+    ? unicodeToArray(string)
+    : asciiToArray(string);
+}
+
+module.exports = stringToArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_unicodeToArray.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_unicodeToArray.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to compose unicode character classes. */
+var rsAstralRange = '\\ud800-\\udfff',
+    rsComboMarksRange = '\\u0300-\\u036f',
+    reComboHalfMarksRange = '\\ufe20-\\ufe2f',
+    rsComboSymbolsRange = '\\u20d0-\\u20ff',
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange,
+    rsVarRange = '\\ufe0e\\ufe0f';
+
+/** Used to compose unicode capture groups. */
+var rsAstral = '[' + rsAstralRange + ']',
+    rsCombo = '[' + rsComboRange + ']',
+    rsFitz = '\\ud83c[\\udffb-\\udfff]',
+    rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
+    rsNonAstral = '[^' + rsAstralRange + ']',
+    rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}',
+    rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]',
+    rsZWJ = '\\u200d';
+
+/** Used to compose unicode regexes. */
+var reOptMod = rsModifier + '?',
+    rsOptVar = '[' + rsVarRange + ']?',
+    rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
+    rsSeq = rsOptVar + reOptMod + rsOptJoin,
+    rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
+
+/** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
+var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+
+/**
+ * Converts a Unicode `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function unicodeToArray(string) {
+  return string.match(reUnicode) || [];
+}
+
+module.exports = unicodeToArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_unicodeWords.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_unicodeWords.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to compose unicode character classes. */
+var rsAstralRange = '\\ud800-\\udfff',
+    rsComboMarksRange = '\\u0300-\\u036f',
+    reComboHalfMarksRange = '\\ufe20-\\ufe2f',
+    rsComboSymbolsRange = '\\u20d0-\\u20ff',
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange,
+    rsDingbatRange = '\\u2700-\\u27bf',
+    rsLowerRange = 'a-z\\xdf-\\xf6\\xf8-\\xff',
+    rsMathOpRange = '\\xac\\xb1\\xd7\\xf7',
+    rsNonCharRange = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf',
+    rsPunctuationRange = '\\u2000-\\u206f',
+    rsSpaceRange = ' \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000',
+    rsUpperRange = 'A-Z\\xc0-\\xd6\\xd8-\\xde',
+    rsVarRange = '\\ufe0e\\ufe0f',
+    rsBreakRange = rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
+
+/** Used to compose unicode capture groups. */
+var rsApos = "['\u2019]",
+    rsBreak = '[' + rsBreakRange + ']',
+    rsCombo = '[' + rsComboRange + ']',
+    rsDigits = '\\d+',
+    rsDingbat = '[' + rsDingbatRange + ']',
+    rsLower = '[' + rsLowerRange + ']',
+    rsMisc = '[^' + rsAstralRange + rsBreakRange + rsDigits + rsDingbatRange + rsLowerRange + rsUpperRange + ']',
+    rsFitz = '\\ud83c[\\udffb-\\udfff]',
+    rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
+    rsNonAstral = '[^' + rsAstralRange + ']',
+    rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}',
+    rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]',
+    rsUpper = '[' + rsUpperRange + ']',
+    rsZWJ = '\\u200d';
+
+/** Used to compose unicode regexes. */
+var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
+    rsMiscUpper = '(?:' + rsUpper + '|' + rsMisc + ')',
+    rsOptContrLower = '(?:' + rsApos + '(?:d|ll|m|re|s|t|ve))?',
+    rsOptContrUpper = '(?:' + rsApos + '(?:D|LL|M|RE|S|T|VE))?',
+    reOptMod = rsModifier + '?',
+    rsOptVar = '[' + rsVarRange + ']?',
+    rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
+    rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
+    rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
+    rsSeq = rsOptVar + reOptMod + rsOptJoin,
+    rsEmoji = '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq;
+
+/** Used to match complex or compound words. */
+var reUnicodeWord = RegExp([
+  rsUpper + '?' + rsLower + '+' + rsOptContrLower + '(?=' + [rsBreak, rsUpper, '$'].join('|') + ')',
+  rsMiscUpper + '+' + rsOptContrUpper + '(?=' + [rsBreak, rsUpper + rsMiscLower, '$'].join('|') + ')',
+  rsUpper + '?' + rsMiscLower + '+' + rsOptContrLower,
+  rsUpper + '+' + rsOptContrUpper,
+  rsOrdUpper,
+  rsOrdLower,
+  rsDigits,
+  rsEmoji
+].join('|'), 'g');
+
+/**
+ * Splits a Unicode `string` into an array of its words.
+ *
+ * @private
+ * @param {string} The string to inspect.
+ * @returns {Array} Returns the words of `string`.
+ */
+function unicodeWords(string) {
+  return string.match(reUnicodeWord) || [];
+}
+
+module.exports = unicodeWords;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/camelCase.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/camelCase.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var capitalize = __webpack_require__(/*! ./capitalize */ "./node_modules/lodash/capitalize.js"),
+    createCompounder = __webpack_require__(/*! ./_createCompounder */ "./node_modules/lodash/_createCompounder.js");
+
+/**
+ * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the camel cased string.
+ * @example
+ *
+ * _.camelCase('Foo Bar');
+ * // => 'fooBar'
+ *
+ * _.camelCase('--foo-bar--');
+ * // => 'fooBar'
+ *
+ * _.camelCase('__FOO_BAR__');
+ * // => 'fooBar'
+ */
+var camelCase = createCompounder(function(result, word, index) {
+  word = word.toLowerCase();
+  return result + (index ? capitalize(word) : word);
+});
+
+module.exports = camelCase;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/capitalize.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/capitalize.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toString = __webpack_require__(/*! ./toString */ "./node_modules/lodash/toString.js"),
+    upperFirst = __webpack_require__(/*! ./upperFirst */ "./node_modules/lodash/upperFirst.js");
+
+/**
+ * Converts the first character of `string` to upper case and the remaining
+ * to lower case.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to capitalize.
+ * @returns {string} Returns the capitalized string.
+ * @example
+ *
+ * _.capitalize('FRED');
+ * // => 'Fred'
+ */
+function capitalize(string) {
+  return upperFirst(toString(string).toLowerCase());
+}
+
+module.exports = capitalize;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/deburr.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/deburr.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var deburrLetter = __webpack_require__(/*! ./_deburrLetter */ "./node_modules/lodash/_deburrLetter.js"),
+    toString = __webpack_require__(/*! ./toString */ "./node_modules/lodash/toString.js");
+
+/** Used to match Latin Unicode letters (excluding mathematical operators). */
+var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
+
+/** Used to compose unicode character classes. */
+var rsComboMarksRange = '\\u0300-\\u036f',
+    reComboHalfMarksRange = '\\ufe20-\\ufe2f',
+    rsComboSymbolsRange = '\\u20d0-\\u20ff',
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
+
+/** Used to compose unicode capture groups. */
+var rsCombo = '[' + rsComboRange + ']';
+
+/**
+ * Used to match [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks) and
+ * [combining diacritical marks for symbols](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks_for_Symbols).
+ */
+var reComboMark = RegExp(rsCombo, 'g');
+
+/**
+ * Deburrs `string` by converting
+ * [Latin-1 Supplement](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
+ * and [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A)
+ * letters to basic Latin letters and removing
+ * [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to deburr.
+ * @returns {string} Returns the deburred string.
+ * @example
+ *
+ * _.deburr('déjà vu');
+ * // => 'deja vu'
+ */
+function deburr(string) {
+  string = toString(string);
+  return string && string.replace(reLatin, deburrLetter).replace(reComboMark, '');
+}
+
+module.exports = deburr;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArray.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/isArray.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+module.exports = isArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObjectLike.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isObjectLike.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isSymbol.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isSymbol.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+}
+
+module.exports = isSymbol;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/lodash.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/lodash.js ***!
@@ -71628,6 +72703,124 @@ return jQuery;
 }.call(this));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toString.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toString.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseToString = __webpack_require__(/*! ./_baseToString */ "./node_modules/lodash/_baseToString.js");
+
+/**
+ * Converts `value` to a string. An empty string is returned for `null`
+ * and `undefined` values. The sign of `-0` is preserved.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.toString(null);
+ * // => ''
+ *
+ * _.toString(-0);
+ * // => '-0'
+ *
+ * _.toString([1, 2, 3]);
+ * // => '1,2,3'
+ */
+function toString(value) {
+  return value == null ? '' : baseToString(value);
+}
+
+module.exports = toString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/upperFirst.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/upperFirst.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createCaseFirst = __webpack_require__(/*! ./_createCaseFirst */ "./node_modules/lodash/_createCaseFirst.js");
+
+/**
+ * Converts the first character of `string` to upper case.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.upperFirst('fred');
+ * // => 'Fred'
+ *
+ * _.upperFirst('FRED');
+ * // => 'FRED'
+ */
+var upperFirst = createCaseFirst('toUpperCase');
+
+module.exports = upperFirst;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/words.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/words.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var asciiWords = __webpack_require__(/*! ./_asciiWords */ "./node_modules/lodash/_asciiWords.js"),
+    hasUnicodeWord = __webpack_require__(/*! ./_hasUnicodeWord */ "./node_modules/lodash/_hasUnicodeWord.js"),
+    toString = __webpack_require__(/*! ./toString */ "./node_modules/lodash/toString.js"),
+    unicodeWords = __webpack_require__(/*! ./_unicodeWords */ "./node_modules/lodash/_unicodeWords.js");
+
+/**
+ * Splits `string` into an array of its words.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to inspect.
+ * @param {RegExp|string} [pattern] The pattern to match words.
+ * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+ * @returns {Array} Returns the words of `string`.
+ * @example
+ *
+ * _.words('fred, barney, & pebbles');
+ * // => ['fred', 'barney', 'pebbles']
+ *
+ * _.words('fred, barney, & pebbles', /[^, ]+/g);
+ * // => ['fred', 'barney', '&', 'pebbles']
+ */
+function words(string, pattern, guard) {
+  string = toString(string);
+  pattern = guard ? undefined : pattern;
+
+  if (pattern === undefined) {
+    return hasUnicodeWord(string) ? unicodeWords(string) : asciiWords(string);
+  }
+  return string.match(pattern) || [];
+}
+
+module.exports = words;
+
 
 /***/ }),
 
@@ -92717,416 +93910,211 @@ new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../state */ "./resources/js/admin/state/index.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/admin/router/routes.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 
- // Containers
 
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
+  routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"],
+  mode: "hash",
+  // https://router.vuejs.org/api/#mode
+  linkActiveClass: "open active",
+  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return {
+        x: 0,
+        y: 0
+      };
+    }
+  }
+});
+router.beforeEach(function (routeTo, routeFrom, next) {
+  // Check if auth is required on this route
+  // (including nested routes).
+  var authRequired = routeTo.matched.some(function (route) {
+    return route.meta.auth;
+  }); // If auth isn't required for the route, just continue.
+
+  if (!authRequired) return next();
+
+  if (_state__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/loggedIn"]) {
+    return _state__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch("auth/fetchProfile").then(function (validUser) {
+      validUser ? next() : redirectToLogin();
+    });
+  } // If auth is required and the user is NOT currently logged in,
+  // redirect to login.
+
+
+  redirectToLogin();
+
+  function redirectToLogin() {
+    // Pass the original route to the login component
+    next({
+      name: "Login"
+    });
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (router);
+
+/***/ }),
+
+/***/ "./resources/js/admin/router/routes.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/router/routes.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// Containers
 var DefaultContainer = function DefaultContainer() {
-  return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../containers/DefaultContainer */ "./resources/js/admin/containers/DefaultContainer.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(7), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ../containers/DefaultContainer */ "./resources/js/admin/containers/DefaultContainer.vue"));
 }; // Views
 
 
 var Dashboard = function Dashboard() {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Dashboard */ "./resources/js/admin/views/Dashboard.vue"));
-};
-
-var Colors = function Colors() {
-  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../views/theme/Colors */ "./resources/js/admin/views/theme/Colors.vue"));
-};
-
-var Typography = function Typography() {
-  return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! ../views/theme/Typography */ "./resources/js/admin/views/theme/Typography.vue"));
-};
-
-var Charts = function Charts() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../views/Charts */ "./resources/js/admin/views/Charts.vue"));
-};
-
-var Widgets = function Widgets() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../views/Widgets */ "./resources/js/admin/views/Widgets.vue"));
-}; // Views - Components
-
-
-var Cards = function Cards() {
-  return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../views/base/Cards */ "./resources/js/admin/views/base/Cards.vue"));
-};
-
-var Forms = function Forms() {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../views/base/Forms */ "./resources/js/admin/views/base/Forms.vue"));
-};
-
-var Switches = function Switches() {
-  return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../views/base/Switches */ "./resources/js/admin/views/base/Switches.vue"));
-};
-
-var Tables = function Tables() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../views/base/Tables */ "./resources/js/admin/views/base/Tables.vue"));
-};
-
-var Tabs = function Tabs() {
-  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ../views/base/Tabs */ "./resources/js/admin/views/base/Tabs.vue"));
-};
-
-var Breadcrumbs = function Breadcrumbs() {
-  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../views/base/Breadcrumbs */ "./resources/js/admin/views/base/Breadcrumbs.vue"));
-};
-
-var Carousels = function Carousels() {
-  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../views/base/Carousels */ "./resources/js/admin/views/base/Carousels.vue"));
-};
-
-var Collapses = function Collapses() {
-  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../views/base/Collapses */ "./resources/js/admin/views/base/Collapses.vue"));
-};
-
-var Jumbotrons = function Jumbotrons() {
-  return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../views/base/Jumbotrons */ "./resources/js/admin/views/base/Jumbotrons.vue"));
-};
-
-var ListGroups = function ListGroups() {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../views/base/ListGroups */ "./resources/js/admin/views/base/ListGroups.vue"));
-};
-
-var Navs = function Navs() {
-  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ../views/base/Navs */ "./resources/js/admin/views/base/Navs.vue"));
-};
-
-var Navbars = function Navbars() {
-  return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ../views/base/Navbars */ "./resources/js/admin/views/base/Navbars.vue"));
-};
-
-var Paginations = function Paginations() {
-  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ../views/base/Paginations */ "./resources/js/admin/views/base/Paginations.vue"));
-};
-
-var Popovers = function Popovers() {
-  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ../views/base/Popovers */ "./resources/js/admin/views/base/Popovers.vue"));
-};
-
-var ProgressBars = function ProgressBars() {
-  return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ../views/base/ProgressBars */ "./resources/js/admin/views/base/ProgressBars.vue"));
-};
-
-var Tooltips = function Tooltips() {
-  return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ../views/base/Tooltips */ "./resources/js/admin/views/base/Tooltips.vue"));
-}; // Views - Buttons
-
-
-var StandardButtons = function StandardButtons() {
-  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../views/buttons/StandardButtons */ "./resources/js/admin/views/buttons/StandardButtons.vue"));
-};
-
-var ButtonGroups = function ButtonGroups() {
-  return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ../views/buttons/ButtonGroups */ "./resources/js/admin/views/buttons/ButtonGroups.vue"));
-};
-
-var Dropdowns = function Dropdowns() {
-  return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ../views/buttons/Dropdowns */ "./resources/js/admin/views/buttons/Dropdowns.vue"));
-};
-
-var BrandButtons = function BrandButtons() {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../views/buttons/BrandButtons */ "./resources/js/admin/views/buttons/BrandButtons.vue"));
-}; // Views - Icons
-
-
-var Flags = function Flags() {
-  return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ../views/icons/Flags */ "./resources/js/admin/views/icons/Flags.vue"));
-};
-
-var FontAwesome = function FontAwesome() {
-  return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ../views/icons/FontAwesome */ "./resources/js/admin/views/icons/FontAwesome.vue"));
-};
-
-var SimpleLineIcons = function SimpleLineIcons() {
-  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ../views/icons/SimpleLineIcons */ "./resources/js/admin/views/icons/SimpleLineIcons.vue"));
-};
-
-var CoreUIIcons = function CoreUIIcons() {
-  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ../views/icons/CoreUIIcons */ "./resources/js/admin/views/icons/CoreUIIcons.vue"));
-}; // Views - Notifications
-
-
-var Alerts = function Alerts() {
-  return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ../views/notifications/Alerts */ "./resources/js/admin/views/notifications/Alerts.vue"));
-};
-
-var Badges = function Badges() {
-  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ../views/notifications/Badges */ "./resources/js/admin/views/notifications/Badges.vue"));
-};
-
-var Modals = function Modals() {
-  return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ../views/notifications/Modals */ "./resources/js/admin/views/notifications/Modals.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/Dashboard */ "./resources/js/admin/views/Dashboard.vue"));
 }; // Views - Pages
 
 
 var Page404 = function Page404() {
-  return __webpack_require__.e(/*! import() */ 38).then(__webpack_require__.bind(null, /*! ../views/pages/Page404 */ "./resources/js/admin/views/pages/Page404.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/pages/Page404 */ "./resources/js/admin/views/pages/Page404.vue"));
 };
 
 var Page500 = function Page500() {
-  return __webpack_require__.e(/*! import() */ 39).then(__webpack_require__.bind(null, /*! ../views/pages/Page500 */ "./resources/js/admin/views/pages/Page500.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../views/pages/Page500 */ "./resources/js/admin/views/pages/Page500.vue"));
 };
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ../views/pages/Login */ "./resources/js/admin/views/pages/Login.vue"));
-};
-
-var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ../views/pages/Register */ "./resources/js/admin/views/pages/Register.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/pages/Login */ "./resources/js/admin/views/pages/Login.vue"));
 }; // Users
 
 
 var Users = function Users() {
-  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../views/users/Users */ "./resources/js/admin/views/users/Users.vue"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/users/Users */ "./resources/js/admin/views/users/Users.vue"));
 };
 
 var User = function User() {
-  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../views/users/User */ "./resources/js/admin/views/users/User.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../views/users/User */ "./resources/js/admin/views/users/User.vue"));
 };
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
-  mode: 'hash',
-  // https://router.vuejs.org/api/#mode
-  linkActiveClass: 'open active',
-  scrollBehavior: function scrollBehavior() {
-    return {
-      y: 0
-    };
+/* harmony default export */ __webpack_exports__["default"] = ([{
+  path: "/",
+  redirect: "/dashboard",
+  name: "Home",
+  component: DefaultContainer,
+  meta: {
+    auth: true
   },
-  routes: [{
-    path: '/',
-    redirect: '/dashboard',
-    name: 'Home',
-    component: DefaultContainer,
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: Dashboard
-    }, {
-      path: 'theme',
-      redirect: '/theme/colors',
-      name: 'Theme',
-      component: {
-        render: function render(c) {
-          return c('router-view');
-        }
-      },
-      children: [{
-        path: 'colors',
-        name: 'Colors',
-        component: Colors
-      }, {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      }]
-    }, {
-      path: 'charts',
-      name: 'Charts',
-      component: Charts
-    }, {
-      path: 'widgets',
-      name: 'Widgets',
-      component: Widgets
-    }, {
-      path: 'users',
-      meta: {
-        label: 'Users'
-      },
-      component: {
-        render: function render(c) {
-          return c('router-view');
-        }
-      },
-      children: [{
-        path: '',
-        component: Users
-      }, {
-        path: ':id',
-        meta: {
-          label: 'User Details'
-        },
-        name: 'User',
-        component: User
-      }]
-    }, {
-      path: 'base',
-      redirect: '/base/cards',
-      name: 'Base',
-      component: {
-        render: function render(c) {
-          return c('router-view');
-        }
-      },
-      children: [{
-        path: 'cards',
-        name: 'Cards',
-        component: Cards
-      }, {
-        path: 'forms',
-        name: 'Forms',
-        component: Forms
-      }, {
-        path: 'switches',
-        name: 'Switches',
-        component: Switches
-      }, {
-        path: 'tables',
-        name: 'Tables',
-        component: Tables
-      }, {
-        path: 'tabs',
-        name: 'Tabs',
-        component: Tabs
-      }, {
-        path: 'breadcrumbs',
-        name: 'Breadcrumbs',
-        component: Breadcrumbs
-      }, {
-        path: 'carousels',
-        name: 'Carousels',
-        component: Carousels
-      }, {
-        path: 'collapses',
-        name: 'Collapses',
-        component: Collapses
-      }, {
-        path: 'jumbotrons',
-        name: 'Jumbotrons',
-        component: Jumbotrons
-      }, {
-        path: 'list-groups',
-        name: 'List Groups',
-        component: ListGroups
-      }, {
-        path: 'navs',
-        name: 'Navs',
-        component: Navs
-      }, {
-        path: 'navbars',
-        name: 'Navbars',
-        component: Navbars
-      }, {
-        path: 'paginations',
-        name: 'Paginations',
-        component: Paginations
-      }, {
-        path: 'popovers',
-        name: 'Popovers',
-        component: Popovers
-      }, {
-        path: 'progress-bars',
-        name: 'Progress Bars',
-        component: ProgressBars
-      }, {
-        path: 'tooltips',
-        name: 'Tooltips',
-        component: Tooltips
-      }]
-    }, {
-      path: 'buttons',
-      redirect: '/buttons/standard-buttons',
-      name: 'Buttons',
-      component: {
-        render: function render(c) {
-          return c('router-view');
-        }
-      },
-      children: [{
-        path: 'standard-buttons',
-        name: 'Standard Buttons',
-        component: StandardButtons
-      }, {
-        path: 'button-groups',
-        name: 'Button Groups',
-        component: ButtonGroups
-      }, {
-        path: 'dropdowns',
-        name: 'Dropdowns',
-        component: Dropdowns
-      }, {
-        path: 'brand-buttons',
-        name: 'Brand Buttons',
-        component: BrandButtons
-      }]
-    }, {
-      path: 'icons',
-      redirect: '/icons/font-awesome',
-      name: 'Icons',
-      component: {
-        render: function render(c) {
-          return c('router-view');
-        }
-      },
-      children: [{
-        path: 'coreui-icons',
-        name: 'CoreUI Icons',
-        component: CoreUIIcons
-      }, {
-        path: 'flags',
-        name: 'Flags',
-        component: Flags
-      }, {
-        path: 'font-awesome',
-        name: 'Font Awesome',
-        component: FontAwesome
-      }, {
-        path: 'simple-line-icons',
-        name: 'Simple Line Icons',
-        component: SimpleLineIcons
-      }]
-    }, {
-      path: 'notifications',
-      redirect: '/notifications/alerts',
-      name: 'Notifications',
-      component: {
-        render: function render(c) {
-          return c('router-view');
-        }
-      },
-      children: [{
-        path: 'alerts',
-        name: 'Alerts',
-        component: Alerts
-      }, {
-        path: 'badges',
-        name: 'Badges',
-        component: Badges
-      }, {
-        path: 'modals',
-        name: 'Modals',
-        component: Modals
-      }]
-    }]
+  children: [{
+    path: "dashboard",
+    name: "Dashboard",
+    component: Dashboard
   }, {
-    path: '/pages',
-    redirect: '/pages/404',
-    name: 'Pages',
+    path: "users",
+    meta: {
+      label: "Users"
+    },
     component: {
       render: function render(c) {
-        return c('router-view');
+        return c("router-view");
       }
     },
     children: [{
-      path: '404',
-      name: 'Page404',
-      component: Page404
+      path: "",
+      component: Users
     }, {
-      path: '500',
-      name: 'Page500',
-      component: Page500
-    }, {
-      path: 'login',
-      name: 'Login',
-      component: Login
-    }, {
-      path: 'register',
-      name: 'Register',
-      component: Register
+      path: ":id",
+      meta: {
+        label: "User Details"
+      },
+      name: "User",
+      component: User
     }]
   }]
-}));
+}, {
+  path: "/pages",
+  redirect: "/pages/404",
+  name: "Pages",
+  component: {
+    render: function render(c) {
+      return c("router-view");
+    }
+  },
+  meta: {
+    auth: false
+  },
+  children: [{
+    path: "404",
+    name: "Page404",
+    component: Page404
+  }, {
+    path: "500",
+    name: "Page500",
+    component: Page500
+  }, {
+    path: "login",
+    name: "Login",
+    component: Login
+  }]
+}]);
+
+/***/ }),
+
+/***/ "./resources/js/admin/services/http.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/services/http.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var axiosInstance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  baseURL: "http://127.0.0.1:8000/api/v1/",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json"
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (axiosInstance);
+
+/***/ }),
+
+/***/ "./resources/js/admin/services/localstorage.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/services/localstorage.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var storage = {
+  getState: function getState(key) {
+    return JSON.parse(window.localStorage.getItem(key));
+  },
+  setState: function setState(key, value) {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  },
+  setAuthHeader: function setAuthHeader(state) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common.Authorization = state.currentUser ? state.currentUser.token_type + " " + state.currentUser.access_token : "";
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (storage);
 
 /***/ }),
 
@@ -93142,16 +94130,417 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _modules_user_user_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/user/user.module */ "./resources/js/admin/state/modules/user/user.module.js");
+/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules */ "./resources/js/admin/state/modules/index.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  modules: {
-    user: _modules_user_user_module__WEBPACK_IMPORTED_MODULE_2__["default"]
+var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  modules: _modules__WEBPACK_IMPORTED_MODULE_2__["default"],
+  // Enable strict mode in development to get a warning
+  // when mutating state outside of a mutation.
+  // https://vuex.vuejs.org/guide/strict.html
+  strict: "development" !== "production"
+}); // Automatically run the `init` action for every module,
+// if one exists.
+
+for (var _i = 0, _Object$keys = Object.keys(_modules__WEBPACK_IMPORTED_MODULE_2__["default"]); _i < _Object$keys.length; _i++) {
+  var moduleName = _Object$keys[_i];
+
+  if (_modules__WEBPACK_IMPORTED_MODULE_2__["default"][moduleName].actions && _modules__WEBPACK_IMPORTED_MODULE_2__["default"][moduleName].actions.init) {
+    store.dispatch("".concat(moduleName, "/init"));
   }
-}));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules sync recursive ^((?!index|\\.unit\\.).)*\\.js$":
+/*!****************************************************************************!*\
+  !*** ./resources/js/admin/state/modules sync ^((?!index|\.unit\.).)*\.js$ ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./auth/auth.actions.js": "./resources/js/admin/state/modules/auth/auth.actions.js",
+	"./auth/auth.getters.js": "./resources/js/admin/state/modules/auth/auth.getters.js",
+	"./auth/auth.module.js": "./resources/js/admin/state/modules/auth/auth.module.js",
+	"./auth/auth.mutations.js": "./resources/js/admin/state/modules/auth/auth.mutations.js",
+	"./auth/auth.states.js": "./resources/js/admin/state/modules/auth/auth.states.js",
+	"./user/user.actions.js": "./resources/js/admin/state/modules/user/user.actions.js",
+	"./user/user.getters.js": "./resources/js/admin/state/modules/user/user.getters.js",
+	"./user/user.module.js": "./resources/js/admin/state/modules/user/user.module.js",
+	"./user/user.mutations.js": "./resources/js/admin/state/modules/user/user.mutations.js",
+	"./user/user.states.js": "./resources/js/admin/state/modules/user/user.states.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/js/admin/state/modules sync recursive ^((?!index|\\.unit\\.).)*\\.js$";
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules/auth/auth.actions.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/admin/state/modules/auth/auth.actions.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/http */ "./resources/js/admin/services/http.js");
+/* harmony import */ var _services_localstorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/localstorage */ "./resources/js/admin/services/localstorage.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var actions = {
+  init: function init(_ref) {
+    var state = _ref.state;
+    _services_localstorage__WEBPACK_IMPORTED_MODULE_2__["default"].setAuthHeader(state.currentUser);
+  },
+  login: function () {
+    var _login = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref2, payload) {
+      var commit, dispatch, getters, _ref3, data;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref2.commit, dispatch = _ref2.dispatch, getters = _ref2.getters;
+
+              if (!getters.loggedIn) {
+                _context.next = 3;
+                break;
+              }
+
+              return _context.abrupt("return", dispatch("fetchProfile"));
+
+            case 3:
+              _context.prev = 3;
+              _context.next = 6;
+              return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].post("/auth/login", payload);
+
+            case 6:
+              _ref3 = _context.sent;
+              data = _ref3.data;
+              commit("SET_CURRENT_USER", data);
+              return _context.abrupt("return", data);
+
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](3);
+
+              if (_context.t0.response && _context.t0.response.status === 401) {
+                commit("SET_CURRENT_USER", null);
+              }
+
+              throw _context.t0;
+
+            case 16:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[3, 12]]);
+    }));
+
+    function login(_x, _x2) {
+      return _login.apply(this, arguments);
+    }
+
+    return login;
+  }(),
+  logOut: function () {
+    var _logOut = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref4) {
+      var commit, _ref5, data;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              commit = _ref4.commit;
+              _context2.prev = 1;
+              _context2.next = 4;
+              return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].post("/auth/logout");
+
+            case 4:
+              _ref5 = _context2.sent;
+              data = _ref5.data;
+              commit("SET_CURRENT_USER", null);
+              commit("SET_PROFILE_USER", null);
+              return _context2.abrupt("return", data);
+
+            case 11:
+              _context2.prev = 11;
+              _context2.t0 = _context2["catch"](1);
+              commit("SET_CURRENT_USER", null);
+              commit("SET_PROFILE_USER", null);
+              throw _context2.t0;
+
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 11]]);
+    }));
+
+    function logOut(_x3) {
+      return _logOut.apply(this, arguments);
+    }
+
+    return logOut;
+  }(),
+  fetchProfile: function () {
+    var _fetchProfile = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref6) {
+      var commit, state, _ref7, data;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              commit = _ref6.commit, state = _ref6.state;
+              _context3.prev = 1;
+              _context3.next = 4;
+              return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/auth/me");
+
+            case 4:
+              _ref7 = _context3.sent;
+              data = _ref7.data;
+              commit("SET_PROFILE_USER", data);
+              return _context3.abrupt("return", data);
+
+            case 10:
+              _context3.prev = 10;
+              _context3.t0 = _context3["catch"](1);
+
+              if (_context3.t0.response && _context3.t0.response.status === 401) {
+                commit("SET_CURRENT_USER", null);
+              }
+
+              return _context3.abrupt("return", null);
+
+            case 14:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[1, 10]]);
+    }));
+
+    function fetchProfile(_x4) {
+      return _fetchProfile.apply(this, arguments);
+    }
+
+    return fetchProfile;
+  }()
+};
+/* harmony default export */ __webpack_exports__["default"] = (actions);
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules/auth/auth.getters.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/admin/state/modules/auth/auth.getters.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var getters = {
+  loggedIn: function loggedIn(state) {
+    return !!state.currentUser;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (getters);
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules/auth/auth.module.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/admin/state/modules/auth/auth.module.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _auth_states__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth.states */ "./resources/js/admin/state/modules/auth/auth.states.js");
+/* harmony import */ var _auth_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.actions */ "./resources/js/admin/state/modules/auth/auth.actions.js");
+/* harmony import */ var _auth_getters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth.getters */ "./resources/js/admin/state/modules/auth/auth.getters.js");
+/* harmony import */ var _auth_mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth.mutations */ "./resources/js/admin/state/modules/auth/auth.mutations.js");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: _auth_states__WEBPACK_IMPORTED_MODULE_0__["default"],
+  getters: _auth_getters__WEBPACK_IMPORTED_MODULE_2__["default"],
+  actions: _auth_actions__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mutations: _auth_mutations__WEBPACK_IMPORTED_MODULE_3__["default"],
+  namespaced: true
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules/auth/auth.mutations.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin/state/modules/auth/auth.mutations.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _services_localstorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/localstorage */ "./resources/js/admin/services/localstorage.js");
+
+var mutations = {
+  SET_CURRENT_USER: function SET_CURRENT_USER(state, newValue) {
+    state.currentUser = newValue;
+    _services_localstorage__WEBPACK_IMPORTED_MODULE_0__["default"].setState("auth.currentUser", state);
+    _services_localstorage__WEBPACK_IMPORTED_MODULE_0__["default"].setAuthHeader(state);
+  },
+  SET_PROFILE_USER: function SET_PROFILE_USER(state, userProfile) {
+    state.userProfile = userProfile;
+    _services_localstorage__WEBPACK_IMPORTED_MODULE_0__["default"].setState("auth.userProfile", userProfile);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (mutations);
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules/auth/auth.states.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/admin/state/modules/auth/auth.states.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _services_localstorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/localstorage */ "./resources/js/admin/services/localstorage.js");
+
+var states = {
+  currentUser: _services_localstorage__WEBPACK_IMPORTED_MODULE_0__["default"].getState("auth.currentUser")
+};
+/* harmony default export */ __webpack_exports__["default"] = (states);
+
+/***/ }),
+
+/***/ "./resources/js/admin/state/modules/index.js":
+/*!***************************************************!*\
+  !*** ./resources/js/admin/state/modules/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/camelCase */ "./node_modules/lodash/camelCase.js");
+/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_camelCase__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _auth_auth_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth/auth.module */ "./resources/js/admin/state/modules/auth/auth.module.js");
+/* harmony import */ var _user_user_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user/user.module */ "./resources/js/admin/state/modules/user/user.module.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Register each file as a corresponding Vuex module. Module nesting
+// will mirror [sub-]directory hierarchy and modules are namespaced
+// as the camelCase equivalent of their file name.
+
+
+
+var modulesCache = {};
+var storeData = {
+  modules: {}
+};
+
+(function updateModules() {
+  // Allow us to dynamically require all Vuex module files.
+  // https://webpack.js.org/guides/dependency-management/#require-context
+  var requireModule = __webpack_require__("./resources/js/admin/state/modules sync recursive ^((?!index|\\.unit\\.).)*\\.js$"); // For every Vuex module...
+
+
+  requireModule.keys().forEach(function (fileName) {
+    var moduleDefinition = requireModule(fileName); // Skip the module during hot reload if it refers to the
+    // same module definition as the one we have cached.
+
+    if (modulesCache[fileName] === moduleDefinition) return; // Update the module cache, for efficient hot reloading.
+
+    modulesCache[fileName] = moduleDefinition; // Get the module path as an array.
+
+    var modulePath = fileName // Remove the "./" from the beginning.
+    .replace(/^\.\//, "") // Remove the file extension from the end.
+    .replace(/\.\w+$/, "") // Split nested modules into an array path.
+    .split(/\//) // camelCase all module namespaces and names.
+    .map(lodash_camelCase__WEBPACK_IMPORTED_MODULE_0___default.a); // Get the modules object for the current path.
+
+    var _getNamespace = getNamespace(storeData, modulePath),
+        modules = _getNamespace.modules; // Add the module to our modules object.
+
+
+    modules[modulePath.pop()] = _objectSpread({
+      // Modules are namespaced by default.
+      namespaced: true
+    }, moduleDefinition);
+  }); // If the environment supports hot reloading...
+
+  if (false) {}
+})(); // Recursively get the namespace of a Vuex module, even if nested.
+
+
+function getNamespace(subtree, path) {
+  if (path.length === 1) return subtree;
+  var namespace = path.shift();
+  subtree.modules[namespace] = _objectSpread({
+    modules: {},
+    namespaced: true
+  }, subtree.modules[namespace]);
+  return getNamespace(subtree.modules[namespace], path);
+} // export default storeData.modules
+
+
+var modules = storeData.modules;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  modules: modules,
+  auth: _auth_auth_module__WEBPACK_IMPORTED_MODULE_1__["default"],
+  user: _user_user_module__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
 
 /***/ }),
 
@@ -93166,11 +94555,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/http */ "./resources/js/admin/services/http.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 var actions = {
   fetch: function () {
@@ -93192,7 +94583,7 @@ var actions = {
               }
 
               _context.next = 6;
-              return axios.get("/users" + queryString);
+              return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/users" + queryString);
 
             case 6:
               _ref2 = _context.sent;

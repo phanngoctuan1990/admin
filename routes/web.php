@@ -18,7 +18,3 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('admin.index');
 });
-
-Route::namespace('Admin')->group(function () {
-    Route::get('users', 'UserController@index');
-});
