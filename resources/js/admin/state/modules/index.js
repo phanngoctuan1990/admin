@@ -5,6 +5,7 @@
 import camelCase from "lodash/camelCase";
 import auth from "./auth/auth.module";
 import user from "./user/user.module";
+import dashboard from "./dashboard/dashboard.module";
 
 const modulesCache = {};
 const storeData = { modules: {} };
@@ -86,5 +87,6 @@ const modules = storeData.modules;
 export default {
     modules,
     auth,
-    user
+    user,
+    dashboard
 };

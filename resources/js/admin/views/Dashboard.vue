@@ -8,7 +8,7 @@
               <b-row>
                 <b-col cols="9">
                   <h4 class="mb-0">Manager users</h4>
-                  <h4 class="mb-0">9.823</h4>
+                  <h4 class="mb-0">{{ countUser }}</h4>
                 </b-col>
                 <b-col cols="3">
                   <i class="icon-user icon-custom"></i>
@@ -25,7 +25,7 @@
               <b-row>
                 <b-col cols="9">
                   <h4 class="mb-0">Manager products</h4>
-                  <h4 class="mb-0">9.823</h4>
+                  <h4 class="mb-0">{{ countProduct }}</h4>
                 </b-col>
                 <b-col cols="3">
                   <i class="icon-present icon-custom"></i>
@@ -41,7 +41,29 @@
 
 <script>
 export default {
-  name: "dashboard"
+  name: "dashboard",
+  data() {
+    return {
+      countUser: 0,
+      countProduct: 0
+    };
+  },
+  mounted() {
+    this.fetchDashboard();
+  },
+  methods: {
+    fetchDashboard() {
+      this.$store
+        .dispatch("dashboard/fetch")
+        .then(res => {
+          this.countUser = res.countUser;
+          this.countProduct = res.countProduct;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }
 };
 </script>
 

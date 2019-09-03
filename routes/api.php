@@ -19,4 +19,5 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1', 'namespace' => 'Admin'], 
         Route::get('me', 'AuthController@me');
     });
     Route::resource('users', 'UserController');
+    Route::get('dashboard', 'DashboardController@index');
 });
