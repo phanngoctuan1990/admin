@@ -12,6 +12,22 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async create({ commit }, payload) {
+        try {
+            const { data } = await http.post("/users", payload);
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+    async update({ commit }, payload) {
+        try {
+            const { data } = await http.patch("/users" + payload.id, payload);
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 };
 

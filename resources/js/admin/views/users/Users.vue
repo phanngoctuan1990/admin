@@ -1,12 +1,19 @@
 <template>
   <b-row>
     <b-col cols="12">
+      <b-alert
+        fade
+        dismissible
+        :show="dismissCountDown"
+        @dismiss-count-down="countDownChanged"
+        variant="success"
+      >{{ dismissMsg }} [{{ dismissCountDown }}]</b-alert>
       <transition name="slide">
         <b-card>
           <div slot="header">
             <div class="float-left">{{ caption }}</div>
             <div class="button-action float-right">
-              <b-button to="/" variant="primary" size="sm" class="mr-1">
+              <b-button @click="doAction('create')" variant="primary" size="sm" class="mr-1">
                 <i class="fa fa-plus"></i> Create
               </b-button>
             </div>
@@ -56,6 +63,36 @@
         </b-card>
       </transition>
     </b-col>
+    <b-modal
+      size="lg"
+      @ok="handleAction"
+      ok-variant="success"
+      v-model="modal.show"
+      class="modal-success"
+      :title="modal.caption"
+      @hidden="resetUserModal"
+    >
+      <b-form-group label="Name">
+        <b-form-input trim v-model="modal.user.name"></b-form-input>
+      </b-form-group>
+      <b-form-group label="Email">
+        <b-form-input type="email" v-model="modal.user.email"></b-form-input>
+      </b-form-group>
+      <b-form-group label="Password">
+        <b-input-group>
+          <b-form-input
+            :type="modal.typePassword ? 'password' : 'text'"
+            v-model="modal.user.password"
+          ></b-form-input>
+          <b-input-group-prepend>
+            <b-button
+              variant="primary"
+              @click="modal.typePassword = !modal.typePassword"
+            >Show / Hide</b-button>
+          </b-input-group-prepend>
+        </b-input-group>
+      </b-form-group>
+    </b-modal>
   </b-row>
 </template>
 
@@ -93,6 +130,21 @@ export default {
   },
   data: () => {
     return {
+      dismissSecs: 5,
+      dismissCountDown: 0,
+      dismissMsg: "",
+      modal: {
+        show: false,
+        action: null,
+        caption: "",
+        typePassword: true,
+        user: {
+          id: "",
+          name: "",
+          email: "",
+          password: ""
+        }
+      },
       items: [],
       fields: [
         { key: "id", label: "ID" },
@@ -111,6 +163,9 @@ export default {
     this.fetchUsers(this.currentPage);
   },
   methods: {
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
     fetchUsers(page) {
       const payload = { page: page };
       this.keyword = _.trim(this.keyword);
@@ -130,6 +185,47 @@ export default {
     rowClicked(item) {
       const userLink = this.userLink(item.id);
       this.$router.push({ path: userLink });
+    },
+    resetUserModal() {
+      this.modal.typePassword = true;
+      this.modal.user = {
+        id: "",
+        name: "",
+        email: "",
+        password: ""
+      };
+    },
+    doAction(action) {
+      switch (action) {
+        case "create":
+          this.modal.caption = "Create user";
+          break;
+
+        case "update":
+          this.modal.caption = "Update user";
+          break;
+      }
+      this.modal.action = action;
+      this.modal.show = true;
+    },
+    handleAction() {
+      let dispatch = "user/update";
+      if (this.modal.action == "create") {
+        dispatch = "user/create";
+      }
+      this.$store
+        .dispatch(dispatch, this.modal.user)
+        .then(res => {
+          this.fetchUsers(1);
+          this.dismissCountDown = this.dismissSecs;
+          this.dismissMsg =
+            this.modal.action == "create"
+              ? "Created user successfully"
+              : "Updated user succesfully";
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
 };
