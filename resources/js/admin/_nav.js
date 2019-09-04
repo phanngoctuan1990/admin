@@ -17,7 +17,8 @@ export default {
         {
             name: "User",
             url: "/users",
-            icon: "icon-user"
+            icon: "icon-user",
+            admin: true
         },
         {
             name: "Product",

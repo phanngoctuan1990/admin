@@ -58,6 +58,7 @@
 
 <script>
 import nav from "../_nav";
+import mixins from "../shared/mixins";
 import {
   Header as AppHeader,
   SidebarToggler,
@@ -77,6 +78,7 @@ import DefaultHeaderDropdownAccnt from "./DefaultHeaderDropdownAccnt";
 
 export default {
   name: "DefaultContainer",
+  mixins: [mixins],
   components: {
     AsideToggler,
     AppHeader,
@@ -95,8 +97,11 @@ export default {
   },
   data() {
     return {
-      nav: nav.items
+      nav: []
     };
+  },
+  mounted() {
+    this.nav = this.checkAdmin(nav.items);
   },
   computed: {
     name() {

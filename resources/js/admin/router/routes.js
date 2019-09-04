@@ -36,6 +36,9 @@ export default [
                         return c("router-view");
                     }
                 },
+                meta: {
+                    admin: true
+                },
                 children: [
                     {
                         path: "",

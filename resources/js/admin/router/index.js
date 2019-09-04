@@ -27,7 +27,13 @@ router.beforeEach((routeTo, routeFrom, next) => {
     if (!authRequired) return next();
     if (store.getters["auth/loggedIn"]) {
         return store.dispatch("auth/fetchProfile").then(validUser => {
-            validUser ? next() : redirectToLogin();
+            if (validUser) {
+                const adminRequired = routeTo.matched.some(route => route.meta.admin);
+                if (!adminRequired) return next();
+                store.getters["auth/isAdmin"] ? next() : redirectToDashboard();
+            } else {
+                redirectToLogin();
+            }
         });
     }
     // If auth is required and the user is NOT currently logged in,
@@ -36,6 +42,10 @@ router.beforeEach((routeTo, routeFrom, next) => {
     function redirectToLogin() {
         // Pass the original route to the login component
         next({ name: "Login" });
+    }
+    function redirectToDashboard() {
+        // Pass the original route to the dashboard component
+        next({ name: "Dashboard" });
     }
 });
 
