@@ -14,6 +14,13 @@ class User extends Authenticatable implements JWTSubject
     const PerPage = 15;
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['is_admin'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -58,5 +65,15 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Get the administrator flag for the user.
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->email === config('app.admin');
     }
 }
